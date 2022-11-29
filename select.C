@@ -21,7 +21,7 @@ const Status QU_Select(const string &result, const int projCnt,
                        const attrInfo projNames[], const attrInfo *attr,
                        const Operator op, const char *attrValue) {
   // Qu_Select sets up things and then calls ScanSelect to do the actual work
-  cout << "Doing QU_Select " << endl;
+  cout << "Doing QU_Select! " << endl;
 }
 
 const Status ScanSelect(const string &result, const int projCnt,
