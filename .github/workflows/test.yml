@@ -1,0 +1,48 @@
+name: Test
+
+on: [pull_request]
+
+jobs:
+  compile-and-format:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - run: sudo apt-get install -y clang-tidy clang-format bear
+      - run: bear -- make -j
+      - run: git diff -U0 HEAD^ | clang-tidy-diff -checks="bugprone-*,readability-*,portability-*,performance-*,modernize-*,clang-analyzer-*,misc-*,-modernize-use-trailing-return-type,-readability-braces-around-statements" -p1 -export-fixes report.yml
+      - uses: platisd/clang-tidy-pr-comments@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          clang_tidy_fixes: report.yml
+      - run: clang-format --dry-run --Werror select.C insert.C delete.C
+      - uses: actions/cache@v3
+        with:
+          path: |
+            data
+            dbcreate
+            dbdestroy
+            qutest
+            minirel
+            testqueries
+          key: minirel-${{ github.run_id }}
+
+  minirel:
+    runs-on: ubuntu-22.04
+    needs: compile-and-format
+    steps:
+      - uses: actions/cache@v3
+        with:
+          path: |
+            data
+            dbcreate
+            dbdestroy
+            qutest
+            minirel
+            testqueries
+          key: minirel-${{ github.run_id }}
+      - run: sudo apt-get install -y csh
+      - run: "./qutest > out.txt && diff -Z out.txt testqueries/ans.txt"
+      - run: "./qutest > out.txt && diff -Z out.txt testqueries/ans.txt"
+      - run: "./qutest > out.txt && diff -Z out.txt testqueries/ans.txt"
