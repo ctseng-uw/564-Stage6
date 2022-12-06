@@ -1,3 +1,4 @@
+#include <memory>
 #include "catalog.h"
 #include "query.h"
 #include "error.h"
@@ -5,6 +6,7 @@
 #include "string.h"
 #include "stdio.h"
 #include "stdlib.h"
+
 
 /*
  * Inserts a record into the specified relation.
@@ -19,7 +21,7 @@ const Status QU_Insert(const string &relation, const int attrCnt,
   Status status;
 
   // first check if the number of attribute is correct
-  RelDesc = relDesc;
+  RelDesc relDesc;
   status = relCat->getInfo(relation, relDesc);
   if (status != OK){
     return status;
@@ -52,6 +54,7 @@ const Status QU_Insert(const string &relation, const int attrCnt,
 
   // create dummy record (following from select.C)
   auto recordWriteBuf = make_unique<char[]>(reclen);
+  Record recordWrite;
   recordWrite.length = reclen;
   recordWrite.data = recordWriteBuf.get();
 
