@@ -73,10 +73,10 @@ const Status QU_Insert(const string &relation, const int attrCnt,
           inputAttribute = (char *)attrList[j].attrValue;
         } else if (attrList[j].attrType == INTEGER){
           containeri = atoi((char *)attrList[j].attrValue);
-          inputAttribute = (char *)containteri;
+          inputAttribute = (char *)containeri;
         } else if (attrList[j].attrType == FLOAT){
           containerf = atof((char *)attrList[j].attrValue);
-          inputAttribute = (char *)containterf;
+          inputAttribute = (char *)containerf;
         }
 
         memcpy(cur, 
