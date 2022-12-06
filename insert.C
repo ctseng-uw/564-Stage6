@@ -76,7 +76,7 @@ const Status QU_Insert(const string &relation, const int attrCnt,
           inputAttribute = (char *)&containeri;
         } else if (attrList[j].attrType == FLOAT){
           containerf = atof((char *)attrList[j].attrValue);
-          inputAttribute = (char *)*containerf;
+          inputAttribute = (char *)&containerf;
         }
 
         memcpy(cur, 
