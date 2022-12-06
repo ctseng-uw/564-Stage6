@@ -59,7 +59,7 @@ const Status QU_Insert(const string &relation, const int attrCnt,
   recordWrite.data = recordWriteBuf.get();
 
   // idea : use double loops to put in the attributes in order
-  int containteri;
+  int containeri;
   float containerf;
   char *cur = recordWriteBuf.get();
   for (int i = 0; i < tempAttrCnt; i++){
@@ -72,10 +72,10 @@ const Status QU_Insert(const string &relation, const int attrCnt,
         if (attrList[j].attrType == STRING){
           inputAttribute = (char *)attrList[j].attrValue;
         } else if (attrList[j].attrType == INTEGER){
-          containteri = atoi(attrList[j].attrValue);
+          containeri = atoi((char *)attrList[j].attrValue);
           inputAttribute = (char *)containteri;
         } else if (attrList[j].attrType == FLOAT){
-          containterf = atof(attrList[j].attrValue);
+          containerf = atof((char *)attrList[j].attrValue);
           inputAttribute = (char *)containterf;
         }
 
