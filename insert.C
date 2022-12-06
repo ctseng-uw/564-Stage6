@@ -69,12 +69,12 @@ const Status QU_Insert(const string &relation, const int attrCnt,
         // We need to care about the data type when we copy it into the cur pointer.
         char* inputAttribute;
 
-        if (attrList[j]->attrType == STRING){
+        if (attrList[j].attrType == STRING){
           inputAttribute = (char *)attrList[j].attrValue;
-        } else if (attrList[j]->attrType == INTEGER){
+        } else if (attrList[j].attrType == INTEGER){
           containteri = atoi(attrList[j].attrValue);
           inputAttribute = (char *)containteri;
-        } else if (attrList[j]->attrType == FLOAT){
+        } else if (attrList[j].attrType == FLOAT){
           containterf = atof(attrList[j].attrValue);
           inputAttribute = (char *)containterf;
         }
