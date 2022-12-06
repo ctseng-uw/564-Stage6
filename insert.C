@@ -59,13 +59,28 @@ const Status QU_Insert(const string &relation, const int attrCnt,
   recordWrite.data = recordWriteBuf.get();
 
   // idea : use double loops to put in the attributes in order
+  int containteri;
+  float containerf;
   char *cur = recordWriteBuf.get();
   for (int i = 0; i < tempAttrCnt; i++){
     for (int j = 0; j < tempAttrCnt; j++){
       // if the attrbute names are the same, we can put it in to the record
       if (strcmp(allAttr[i].attrName, attrList[j].attrName) == 0){
+        // We need to care about the data type when we copy it into the cur pointer.
+        char* inputAttribute;
+
+        if (attrList[j]->attrType == STRING){
+          inputAttribute = (char *)attrList[j].attrValue;
+        } else if (attrList[j]->attrType == INTEGER){
+          containteri = atoi(attrList[j].attrValue);
+          inputAttribute = (char *)containteri;
+        } else if (attrList[j]->attrType == FLOAT){
+          containterf = atof(attrList[j].attrValue);
+          inputAttribute = (char *)containterf;
+        }
+
         memcpy(cur, 
-                static_cast<char *>(attrList[j].attrValue),
+                inputAttribute,
                 allAttr[i].attrLen);
         cur = cur + allAttr[i].attrLen;              
         break;
