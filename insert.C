@@ -67,7 +67,7 @@ const Status QU_Insert(const string &relation, const int attrCnt,
       // if the attrbute names are the same, we can put it in to the record
       if (strcmp(allAttr[i].attrName, attrList[j].attrName) == 0){
         // We need to care about the data type when we copy it into the cur pointer.
-        char* inputAttribute;
+        char* inputAttribute = NULL;
 
         if (attrList[j].attrType == STRING){
           inputAttribute = (char *)attrList[j].attrValue;
