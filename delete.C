@@ -22,7 +22,7 @@ const Status QU_Delete(const string &relation, const string &attrName,
   // offset calculation
   int offset = 0;
   AttrDesc attrDesc;
-  if (attrName != nullptr) {  
+  if (attrName != NULL) {  
     status = attrCat->getInfo(relation, attrName, attrDesc);
     if (status != OK)
     {
@@ -43,7 +43,7 @@ const Status QU_Delete(const string &relation, const string &attrName,
 
   // start scan (similar to select.C)
   if (type == NULL) {
-    status = scan.startScan(offset, 0, type, nullptr, EQ);
+    status = scan.startScan(offset, 0, type, NULL, EQ);
   } else if (type == STRING) {
     status = scan.startScan(offset, strlen(attrValue), type, attrValue, op);
   } else if (type == INTEGER) {
