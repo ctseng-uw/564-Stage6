@@ -24,7 +24,7 @@ const Status QU_Delete(const string &relation, const string &attrName,
   // offset calculation
   int offset = 0;
   AttrDesc attrDesc;
-  if (attrName != NULL) {
+  if (!attrName.empty()) {
     status = attrCat->getInfo(relation, attrName, attrDesc);
     if (status != OK) {
       return status;
