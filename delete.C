@@ -1,7 +1,9 @@
+#include <cstdlib>
+#include <cstring>
 #include "catalog.h"
-#include "query.h"
-#include "heapfile.h"
 #include "error.h"
+#include "heapfile.h"
+#include "query.h"
 #include "stdio.h"
 #include "stdlib.h"
 
@@ -22,10 +24,9 @@ const Status QU_Delete(const string &relation, const string &attrName,
   // offset calculation
   int offset = 0;
   AttrDesc attrDesc;
-  if (attrName != NULL) {  
+  if (attrName != NULL) {
     status = attrCat->getInfo(relation, attrName, attrDesc);
-    if (status != OK)
-    {
+    if (status != OK) {
       return status;
     }
     offset = attrDesc.attrOffset;
@@ -33,8 +34,7 @@ const Status QU_Delete(const string &relation, const string &attrName,
 
   // filtered HeapFileScan to locate qualifying tuples
   HeapFileScan scan(attrName, status);
-  if (status != OK)
-  {
+  if (status != OK) {
     return status;
   }
 
@@ -59,21 +59,18 @@ const Status QU_Delete(const string &relation, const string &attrName,
     return NOTUSED1;
   }
 
-  
-  Rid rid;
+  RID rid;
   Record record;
 
   while ((status = scan.scanNext(rid)) != FILEEOF) {
     // Get the record
     status = scan.getRecord(record);
-    if (status != OK)
-    {
+    if (status != OK) {
       return status;
     }
     // delete tuple
     status = attrCat->removeInfo(relation, attrName);
-    if (status != OK)
-    {
+    if (status != OK) {
       return status;
     }
   }
