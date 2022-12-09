@@ -42,7 +42,7 @@ const Status QU_Delete(const string &relation, const string &attrName,
   float floatFilter;
 
   // start scan (similar to select.C)
-  if (type == nullptr) {
+  if (type == NULL) {
     status = scan.startScan(offset, 0, type, nullptr, EQ);
   } else if (type == STRING) {
     status = scan.startScan(offset, strlen(attrValue), type, attrValue, op);
