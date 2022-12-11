@@ -1,11 +1,11 @@
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <cstdio>
+
 #include "catalog.h"
 #include "error.h"
 #include "heapfile.h"
 #include "query.h"
-
 
 /*
  * Deletes records from a specified relation.
