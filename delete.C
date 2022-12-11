@@ -29,7 +29,7 @@ const Status QU_Delete(const string &relation, const string &attrName,
       return status;
     }
     // start scan with no filter
-    status = scan.startScan(0, relation.length() + 1, STRING, NULL, EQ);
+    status = scan.startScan(0, relation.length() + 1, STRING, nullptr, EQ);
     if (status != OK) {
       return status;
     }
