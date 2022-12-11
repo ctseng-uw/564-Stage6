@@ -41,7 +41,7 @@ const Status QU_Delete(const string &relation, const string &attrName,
         return status;
       }
     }
-    scan.endScan()
+    scan.endScan();
     return OK;
   }
 
